@@ -3,8 +3,12 @@
 import random
 import time
 
-base = 4
+doubles = False
+base = 7
 questions = 30
+
+min=1
+max=10
 
 correct = 0
 wrong = 0
@@ -15,8 +19,10 @@ choices=[]
 
 for question in range(questions):
     if len(choices) == 0:
-        choices = range(13)
+        choices = range(min, max+1)
     multiplicand = random.choice(choices)
+    if doubles:
+        base = multiplicand
     choices.remove(multiplicand)
 
     good_answer = False
