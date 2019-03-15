@@ -3,8 +3,9 @@
 import random
 import time
 
+divide = True
 doubles = False
-base = 7
+base = 2
 questions = 30
 
 min=1
@@ -27,7 +28,14 @@ for question in range(questions):
 
     good_answer = False
     while not good_answer:
-        guess_string = raw_input("{}. What is {} x {}? ".format(question+1, base, multiplicand))
+        if divide:
+            prompt = '{}. What is {} / {}? '.format(question+1, multiplicand * base, base)
+            answer = multiplicand
+        else:
+            prompt = "{}. What is {} x {}? ".format(question+1, base, multiplicand)
+            answer = base * multiplicand
+
+        guess_string = raw_input(prompt)
         try:
             guess = int(guess_string)
             good_answer = True
@@ -35,13 +43,24 @@ for question in range(questions):
             print "Invalid entry - not a number"
             good_answer = False
 
-    if guess == base * multiplicand:
+    if guess == answer:
         print "That is correct!"
         correct += 1
     else:
-        print "That is wrong, the correct answer is {}".format(base * multiplicand)
+        print "That is wrong, the correct answer is {}".format(answer)
         wrong += 1
 
 end_time = time.time()
 
-print "DONE!  You got {} right and {} wrong in {:.3} seconds".format(correct, wrong, end_time - start_time)
+total_seconds = int(round(end_time - start_time))
+minutes = total_seconds / 60
+seconds = total_seconds % 60
+
+if minutes == 1:
+    time_str = '{} minute {} seconds'.format(minutes, seconds)
+elif minutes > 1:
+    time_str = '{} minutes {} seconds'.format(minutes, seconds)
+else:
+    time_str = '{} seconds'.format(seconds)
+
+print "DONE!  You got {} right and {} wrong in {}".format(correct, wrong, time_str)
