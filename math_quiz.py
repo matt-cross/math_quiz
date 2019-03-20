@@ -5,7 +5,7 @@ import time
 
 divide = True
 doubles = False
-base = 2
+base = 4
 questions = 30
 
 min=1
@@ -29,7 +29,7 @@ for question in range(questions):
     good_answer = False
     while not good_answer:
         if divide:
-            prompt = '{}. What is {} / {}? '.format(question+1, multiplicand * base, base)
+            prompt = '{}. What is {} --- {}? '.format(question+1, multiplicand * base, base)
             answer = multiplicand
         else:
             prompt = "{}. What is {} x {}? ".format(question+1, base, multiplicand)
