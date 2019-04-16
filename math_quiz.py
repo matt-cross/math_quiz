@@ -3,13 +3,14 @@
 import random
 import time
 
-divide = True
+# Supported modes include multiply, divide, and random.
+mode = 'random'
 doubles = False
-base = 9
+base = 'random'
 questions = 30
 
 min=1
-max=10
+max=12
 
 correct = 0
 wrong = 0
@@ -23,17 +24,21 @@ for question in range(questions):
         choices = range(min, max+1)
     multiplicand = random.choice(choices)
     if doubles:
-        base = multiplicand
+        actual_base = multiplicand
+    elif base == 'random':
+        actual_base = random.choice(range(1,12))
+    else:
+        actual_base = base
     choices.remove(multiplicand)
 
     good_answer = False
     while not good_answer:
-        if divide:
-            prompt = '{}. What is {} --- {}? '.format(question+1, multiplicand * base, base)
+        if mode == 'divide' or (mode == 'random' and random.choice([True, False])):
+            prompt = '{}. What is {} --- {}? '.format(question+1, multiplicand * actual_base, actual_base)
             answer = multiplicand
         else:
-            prompt = "{}. What is {} x {}? ".format(question+1, base, multiplicand)
-            answer = base * multiplicand
+            prompt = "{}. What is {} x {}? ".format(question+1, actual_base, multiplicand)
+            answer = actual_base * multiplicand
 
         guess_string = raw_input(prompt)
         try:
