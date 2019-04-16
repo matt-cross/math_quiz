@@ -5,7 +5,7 @@ import time
 
 divide = True
 doubles = False
-base = 4
+base = 9
 questions = 30
 
 min=1
